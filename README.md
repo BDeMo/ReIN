@@ -2,6 +2,11 @@
   <h1 align="center">ReIN</h1>
   <p align="center"><em>Harness your code.</em></p>
   <p align="center">
+    <a href="https://pypi.org/project/rein-harness/"><img src="https://img.shields.io/pypi/v/rein-harness" alt="PyPI"></a>
+    <a href="https://github.com/BDeMo/ReIN/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="License"></a>
+    <a href="https://www.python.org/"><img src="https://img.shields.io/pypi/pyversions/rein-harness" alt="Python"></a>
+  </p>
+  <p align="center">
     <a href="#quick-start">Quick Start</a> &middot;
     <a href="#architecture">Architecture</a> &middot;
     <a href="#usage">Usage</a> &middot;
@@ -39,9 +44,15 @@ Most agentic coding tools are closed-source black boxes. ReIN opens up the full 
 ### Install
 
 ```bash
+pip install rein-harness
+```
+
+Or from source:
+
+```bash
 git clone https://github.com/BDeMo/ReIN.git
 cd ReIN
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### Run
@@ -49,14 +60,14 @@ pip install -r requirements.txt
 ```bash
 # Cloud mode (Anthropic Claude)
 export ANTHROPIC_API_KEY=sk-ant-xxx
-python -m rein direct
+rein direct
 
 # Fully offline (Ollama)
 ollama pull qwen2.5-coder:7b
-python -m rein direct --local
+rein direct --local
 
 # Custom local server (LM Studio / llama.cpp / vLLM)
-python -m rein direct --local --local-url http://localhost:1234/v1 --local-model my-model
+rein direct --local --local-url http://localhost:1234/v1 --local-model my-model
 ```
 
 ## Architecture
@@ -86,7 +97,7 @@ rein/
 ├── server/
 │   └── app.py              FastAPI server with WebSocket streaming
 ├── client/
-│   └── cli.py              Terminal client (direct + server modes)
+│   └── cli.py              Terminal client with rich Markdown rendering
 └── main.py                 CLI entry point
 ```
 
@@ -136,26 +147,26 @@ Layer 5  PreToolUse Hook             Runtime dynamic decisions
 
 ```bash
 # Anthropic Claude
-python -m rein direct
+rein direct
 
 # Local LLM (Ollama)
-python -m rein direct --local --local-model qwen2.5-coder:7b
+rein direct --local --local-model qwen2.5-coder:7b
 
 # Custom system prompt
-python -m rein direct --system-prompt "You are a Python expert."
+rein direct --system-prompt "You are a Python expert."
 ```
 
 ### Server + Client
 
 ```bash
-# Terminal 1: server
-python -m rein server --port 8765
+# Terminal 1: start server
+rein server --port 8765
 
-# Terminal 2: client
-python -m rein client --url ws://localhost:8765/ws/chat
+# Terminal 2: connect client
+rein client --url ws://localhost:8765/ws/chat
 
 # Local LLM server
-python -m rein server --local --local-model llama3.1:8b
+rein server --local --local-model llama3.1:8b
 ```
 
 ### API
@@ -233,6 +244,8 @@ Auto-detected from model name. Force native with `--native-tools`.
 | [uvicorn](https://github.com/encode/uvicorn) | ASGI server |
 | [websockets](https://github.com/python-websockets/websockets) | WebSocket client |
 | [pyyaml](https://github.com/yaml/pyyaml) | YAML parsing |
+| [rich](https://github.com/Textualize/rich) | Rich terminal output and Markdown rendering |
+| [prompt-toolkit](https://github.com/prompt-toolkit/python-prompt-toolkit) | Input history and editing |
 
 ## Acknowledgements
 
@@ -246,4 +259,4 @@ ReIN is inspired by and built upon ideas from:
 
 ## License
 
-[MIT](LICENSE)
+[CC BY-NC-SA 4.0](LICENSE) — Non-commercial use. Share alike.

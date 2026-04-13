@@ -2,6 +2,11 @@
   <h1 align="center">ReIN</h1>
   <p align="center"><em>驾驭你的代码。</em></p>
   <p align="center">
+    <a href="https://pypi.org/project/rein-harness/"><img src="https://img.shields.io/pypi/v/rein-harness" alt="PyPI"></a>
+    <a href="https://github.com/BDeMo/ReIN/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="License"></a>
+    <a href="https://www.python.org/"><img src="https://img.shields.io/pypi/pyversions/rein-harness" alt="Python"></a>
+  </p>
+  <p align="center">
     <a href="#快速开始">快速开始</a> &middot;
     <a href="#架构">架构</a> &middot;
     <a href="#使用方式">使用方式</a> &middot;
@@ -39,9 +44,15 @@
 ### 安装
 
 ```bash
+pip install rein-harness
+```
+
+或从源码安装：
+
+```bash
 git clone https://github.com/BDeMo/ReIN.git
 cd ReIN
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 运行
@@ -49,14 +60,14 @@ pip install -r requirements.txt
 ```bash
 # 云端模式（Anthropic Claude）
 export ANTHROPIC_API_KEY=sk-ant-xxx
-python -m rein direct
+rein direct
 
 # 完全离线（Ollama）
 ollama pull qwen2.5-coder:7b
-python -m rein direct --local
+rein direct --local
 
 # 自定义本地服务器
-python -m rein direct --local --local-url http://localhost:1234/v1 --local-model my-model
+rein direct --local --local-url http://localhost:1234/v1 --local-model my-model
 ```
 
 ## 架构
@@ -86,7 +97,7 @@ rein/
 ├── server/
 │   └── app.py              FastAPI 服务器 + WebSocket 流式
 ├── client/
-│   └── cli.py              终端客户端（直连 + 服务器模式）
+│   └── cli.py              终端客户端（Rich Markdown 渲染）
 └── main.py                 CLI 入口
 ```
 
@@ -136,26 +147,26 @@ rein/
 
 ```bash
 # Anthropic Claude
-python -m rein direct
+rein direct
 
 # 本地 LLM（Ollama）
-python -m rein direct --local --local-model qwen2.5-coder:7b
+rein direct --local --local-model qwen2.5-coder:7b
 
 # 自定义系统提示
-python -m rein direct --system-prompt "你是一个 Python 专家。"
+rein direct --system-prompt "你是一个 Python 专家。"
 ```
 
 ### 服务器 + 客户端
 
 ```bash
 # 终端 1：启动服务器
-python -m rein server --port 8765
+rein server --port 8765
 
 # 终端 2：连接客户端
-python -m rein client --url ws://localhost:8765/ws/chat
+rein client --url ws://localhost:8765/ws/chat
 
 # 本地 LLM 服务器
-python -m rein server --local --local-model llama3.1:8b
+rein server --local --local-model llama3.1:8b
 ```
 
 ### API 接口
@@ -219,6 +230,8 @@ ReIN 支持两种工具调用模式：
 | [uvicorn](https://github.com/encode/uvicorn) | ASGI 服务器 |
 | [websockets](https://github.com/python-websockets/websockets) | WebSocket 客户端 |
 | [pyyaml](https://github.com/yaml/pyyaml) | YAML 解析 |
+| [rich](https://github.com/Textualize/rich) | 终端富文本与 Markdown 渲染 |
+| [prompt-toolkit](https://github.com/prompt-toolkit/python-prompt-toolkit) | 输入历史与编辑 |
 
 ## 致谢
 
@@ -232,4 +245,4 @@ ReIN 的设计灵感来自：
 
 ## 许可证
 
-[MIT](LICENSE)
+[CC BY-NC-SA 4.0](LICENSE) — 非商业使用，相同方式共享。
