@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "ReIN — harness your code. An open-source agentic coding runtime."
 readme = "README.md"
 requires-python = ">=3.11"
-license = "MIT"
+license = "CC-BY-NC-SA-4.0"
 authors = [
     { name = "BDeMo" },
 ]
