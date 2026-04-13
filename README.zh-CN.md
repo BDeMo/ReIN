@@ -4,7 +4,7 @@
   <p align="center">
     <a href="https://pypi.org/project/rein-harness/"><img src="https://img.shields.io/pypi/v/rein-harness" alt="PyPI"></a>
     <a href="https://github.com/BDeMo/ReIN/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="License"></a>
-    <a href="https://www.python.org/"><img src="https://img.shields.io/pypi/pyversions/rein-harness" alt="Python"></a>
+
   </p>
   <p align="center">
     <a href="#快速开始">快速开始</a> &middot;

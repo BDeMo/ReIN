@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+; ReIN — Remove right-click context menu
+; Double-click this file to uninstall
+
+[-HKEY_CLASSES_ROOT\Directory\shell\ReIN]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\ReIN]

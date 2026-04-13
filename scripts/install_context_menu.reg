@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+
+; ReIN — Right-click context menu for Windows Explorer
+; Double-click this file to install (requires admin approval)
+; To uninstall, use uninstall_context_menu.reg
+
+; Right-click on a folder
+[HKEY_CLASSES_ROOT\Directory\shell\ReIN]
+@="Open with ReIN"
+
+[HKEY_CLASSES_ROOT\Directory\shell\ReIN\command]
+@="cmd /k \"cd /d \"%V\" && rein\""
+
+; Right-click on folder background (inside a folder)
+[HKEY_CLASSES_ROOT\Directory\Background\shell\ReIN]
+@="Open with ReIN"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\ReIN\command]
+@="cmd /k \"cd /d \"%V\" && rein\""

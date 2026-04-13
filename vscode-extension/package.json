@@ -1,0 +1,124 @@
+{
+  "name": "rein-harness",
+  "displayName": "ReIN",
+  "description": "ReIN — harness your code. An agentic coding assistant.",
+  "version": "0.1.0",
+  "publisher": "BDeMo",
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BDeMo/ReIN"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Programming Languages"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "rein",
+          "title": "ReIN",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "rein": [
+        {
+          "type": "webview",
+          "id": "rein.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "rein.startServer",
+        "title": "ReIN: Start Server"
+      },
+      {
+        "command": "rein.stopServer",
+        "title": "ReIN: Stop Server"
+      },
+      {
+        "command": "rein.openChat",
+        "title": "ReIN: Open Chat"
+      },
+      {
+        "command": "rein.askAboutFile",
+        "title": "ReIN: Ask About This File"
+      },
+      {
+        "command": "rein.askAboutSelection",
+        "title": "ReIN: Ask About Selection"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "rein.askAboutFile",
+          "group": "rein@1",
+          "when": "resourceScheme == file"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "rein.askAboutSelection",
+          "group": "rein@1",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "rein.askAboutFile",
+          "group": "rein@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ReIN",
+      "properties": {
+        "rein.serverUrl": {
+          "type": "string",
+          "default": "ws://localhost:8765/ws/chat",
+          "description": "WebSocket URL for the ReIN server"
+        },
+        "rein.autoStartServer": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start the ReIN server when opening chat"
+        },
+        "rein.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "rein.serverArgs": {
+          "type": "array",
+          "default": [],
+          "items": { "type": "string" },
+          "description": "Additional arguments for the ReIN server (e.g. --local, --local-model)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}
